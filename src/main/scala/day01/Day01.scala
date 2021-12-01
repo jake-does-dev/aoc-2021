@@ -32,8 +32,8 @@ object Day01 {
     def generateDepthsSequence(depths: List[Int], window: Int): List[Int] = {
         val windowSlide = 1
 
-        val blah = depths.sliding(window, windowSlide).toList
-        val windowSummedSequence = blah.map(x => x.sum)
+        val windowTuples = depths.sliding(window, windowSlide).toList
+        val windowSummedSequence = windowTuples.map(x => x.sum)
 
         windowSummedSequence
     }
