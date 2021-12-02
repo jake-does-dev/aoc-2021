@@ -1,6 +1,8 @@
 package org.jakedoes.dev
 package day02
 
+import day02.MovementType.{Aimed, Naive}
+
 import org.scalatest.funsuite.AnyFunSuite
 
 class Day02Test extends AnyFunSuite {
@@ -47,16 +49,40 @@ class Day02Test extends AnyFunSuite {
         assert(position == (19, 8))
     }
 
+    test("aiming") {
+        val moves = List(
+            "forward 5",
+            "down 6",
+            "forward 3",
+            "up 1",
+            "forward 2"
+        )
+        val position = Day02.resolveSubmarineAimedPosition(moves)
+
+        assert(position == (10, 6*3 + 5*2))
+    }
+
     test("part one example input)") {
-        val (distance, depth) = Day02.submarinePosition("day02/example.txt")
+        val (distance, depth) = Day02.submarinePosition("day02/example.txt", Naive)
 
         assert(distance * depth == 150)
     }
 
     test("part one puzzle input)") {
-        val (distance, depth) = Day02.submarinePosition("day02/puzzleInput.txt")
+        val (distance, depth) = Day02.submarinePosition("day02/puzzleInput.txt", Naive)
 
         assert(distance * depth == 1882980)
     }
 
+    test("part two example input") {
+        val (distance, depth) = Day02.submarinePosition("day02/example.txt", Aimed)
+
+        assert(distance * depth == 900)
+    }
+
+    test("part two puzzle input") {
+        val (distance, depth) = Day02.submarinePosition("day02/puzzleInput.txt", Aimed)
+
+        assert(distance * depth == 1971232560)
+    }
 }
