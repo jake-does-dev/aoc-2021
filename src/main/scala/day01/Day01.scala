@@ -7,8 +7,8 @@ import scala.io.Source
 
 object Day01 {
 
-    def depthSweep(location: String, window: Int): Int = {
-        val depths = readDepths(location)
+    def depthSweep(fileLocation: String, window: Int): Int = {
+        val depths = readDepths(fileLocation)
 
         val numIncreases = calculateNumIncreases(depths, window)
 
