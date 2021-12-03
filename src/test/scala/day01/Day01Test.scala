@@ -1,6 +1,8 @@
 package org.jakedoes.dev
 package day01
 
+import problems.Day01
+
 import org.scalatest.funsuite.AnyFunSuite
 
 class Day01Test extends AnyFunSuite {

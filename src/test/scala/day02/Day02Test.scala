@@ -1,7 +1,8 @@
 package org.jakedoes.dev
 package day02
 
-import day02.MovementType.{Aimed, Naive}
+import helpers.MovementType.{Aimed, Naive}
+import problems.Day02
 
 import org.scalatest.funsuite.AnyFunSuite
 

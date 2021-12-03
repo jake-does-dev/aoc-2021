@@ -1,9 +1,7 @@
 package org.jakedoes.dev
-package day01
+package problems
 
 import utils.FileUtils
-
-import scala.io.Source
 
 object Day01 {
 
@@ -24,7 +22,7 @@ object Day01 {
         val next = depthsSequence.slice(1, depths.size)
 
         val pairs = previous.zip(next)
-        pairs.foreach((x, y) => if (y > x) count = count + 1 )
+        pairs.foreach((x, y) => if (y > x) count = count + 1)
 
         count
     }

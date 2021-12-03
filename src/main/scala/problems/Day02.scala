@@ -1,10 +1,9 @@
 package org.jakedoes.dev
-package day02
+package problems
 
-import day02.MovementType.{Aimed, Naive}
+import helpers.MovementType
+import helpers.MovementType.{Aimed, Naive}
 import utils.FileUtils
-
-import scala.collection.mutable.ListBuffer
 
 object Day02 {
 
@@ -30,7 +29,7 @@ object Day02 {
 
         val totalDepth = moveTuples
             .filter((direction, _) => direction != "forward")
-            .map( {
+            .map({
                 case ("down", value) => value
                 case ("up", value) => -value
             })
@@ -47,7 +46,7 @@ object Day02 {
         var totalForwardDistance = 0
         var totalDepthChange = 0
 
-        moveTuples.foreach{
+        moveTuples.foreach {
             case ("down", value) => aim += value
             case ("up", value) => aim -= value
             case ("forward", value) =>

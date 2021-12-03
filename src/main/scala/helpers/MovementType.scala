@@ -1,5 +1,5 @@
 package org.jakedoes.dev
-package day02
+package helpers
 
 enum MovementType:
     case Naive, Aimed
