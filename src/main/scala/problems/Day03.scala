@@ -14,23 +14,17 @@ object Day03 {
 
         val bitSum : List[Int] = calculateBitSum(bitLists)
 
-        var epsilonRateBuffer = ListBuffer[String]()
-        var gammaRateBuffer = ListBuffer[String]()
-
-        val halfCount = bitLists.length / 2
+        var (epsilonRate, gammaRate) = ("", "")
 
         bitSum.foreach(x => {
-            if (x > halfCount) {
-                epsilonRateBuffer += "1"
-                gammaRateBuffer += "0"
+            if (x >= bitLists.length / 2) {
+                epsilonRate += "1"
+                gammaRate += "0"
             } else {
-                epsilonRateBuffer += "0"
-                gammaRateBuffer += "1"
+                epsilonRate += "0"
+                gammaRate += "1"
             }
         })
-
-        val epsilonRate = epsilonRateBuffer.reduce((x, y) => x.concat(y))
-        val gammaRate = gammaRateBuffer.reduce((x, y) => x.concat(y))
 
         (Integer.parseInt(epsilonRate, 2), Integer.parseInt(gammaRate, 2))
     }
@@ -47,7 +41,7 @@ object Day03 {
     def calculateBitSum(bitLists: List[List[Int]]) : List[Int] = {
         bitLists
             .reduce((x, y) => {
-                x.zip(y).map((a, b) => a + b)
+                x.zip(y).map((a, b) => a + b) //pairwise summation acts as element wise operation on two Lists
             })
     }
 
@@ -56,12 +50,8 @@ object Day03 {
 
         val bitLists = resolveBitLists(lines)
 
-        val oxygenGeneratorRating = determineRating(bitLists, oxygenRatingComparer)
-            .map(x => x.toString)
-            .reduce((x, y) => x.concat(y))
-        val carbonDioxideGeneratorRating = determineRating(bitLists, carbonDioxideRatingComparer)
-            .map(x => x.toString)
-            .reduce((x, y) => x.concat(y))
+        val (oxygenGeneratorRating, carbonDioxideGeneratorRating) =
+            (determineRating(bitLists, oxygenRatingComparer), determineRating(bitLists, carbonDioxideRatingComparer))
 
         (Integer.parseInt(oxygenGeneratorRating, 2), Integer.parseInt(carbonDioxideGeneratorRating, 2))
     }
@@ -74,7 +64,7 @@ object Day03 {
         onesCount < zerosCount
     }
 
-    def determineRating(bitLists: List[List[Int]], comparer: (Int, Int) => Boolean) : List[Int] = {
+    def determineRating(bitLists: List[List[Int]], comparer: (Int, Int) => Boolean) : String = {
         var bitIdx = 0
 
         var filteredLists = bitLists
@@ -88,7 +78,6 @@ object Day03 {
                 filteredLists = filteredLists.filter(
                     x => x(bitIdx) == 1
                 )
-
             } else {
                 filteredLists = filteredLists.filter(
                     x => x(bitIdx) == 0
@@ -99,5 +88,7 @@ object Day03 {
         }
 
         filteredLists.head
+            .map(x => x.toString)
+            .reduce((x, y) => x.concat(y))
     }
 }
