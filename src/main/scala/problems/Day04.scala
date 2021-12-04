@@ -3,9 +3,11 @@ package problems
 
 import utils.FileUtils
 
+import scala.collection.mutable.ListBuffer
+
 object Day04 {
 
-    def playBingo(fileLocation: String) : (Int, Int) = {
+    def playBingo(fileLocation: String, continuePlayingCriterion: List[BingoBoard] => Boolean) : (Int, Int) = {
 
         val lines = FileUtils.readFile(fileLocation)
         val bingoBalls = lines.head.split(",").map(x => x.toInt)
@@ -24,31 +26,41 @@ object Day04 {
             .map(card => new BingoBoard(card))
             .toList
 
-        var ballIdx = 0
 
-        while (!searchingForBingo(bingoBoards)) {
+        var ballIdx = 0
+        val winningBoards = ListBuffer[BingoBoard]()
+
+        while (continuePlayingCriterion(bingoBoards)) {
 
             val ball = bingoBalls(ballIdx)
 
             bingoBoards.foreach(board => {
                 board.mark(ball)
+
+                if (board.isBingo && !board.called) {
+                    winningBoards.prepend(board)
+                    board.called = true
+                }
             })
 
             ballIdx += 1
         }
 
-        val winningBoard = bingoBoards
-            .filter(board => board.isBingo)
-            .head
-
+        val winningBoard = winningBoards.head
         val lastBallDrawn = bingoBalls(ballIdx - 1)
 
         (lastBallDrawn, winningBoard.sumUnmarked())
     }
 
-    def searchingForBingo(bingoBoards: List[BingoBoard]): Boolean = {
-        bingoBoards
+    def oneBoardNeedsBingo(bingoBoards: List[BingoBoard]): Boolean = {
+        !bingoBoards
             .map(board => board.isBingo)
             .reduce((x, y) => x || y)
+    }
+
+    def everyBoardNeedsBingo(bingoBoards: List[BingoBoard]): Boolean = {
+        !bingoBoards
+            .map(board => board.isBingo)
+            .reduce((x, y) => x && y)
     }
 }

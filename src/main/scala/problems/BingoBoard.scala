@@ -2,6 +2,8 @@ package org.jakedoes.dev
 package problems
 
 class BingoBoard(var points : List[List[BingoPoint]]) {
+    var called = false
+
     def mark(bingoBall : Int): Unit = {
         points
             .map(row => {
@@ -23,6 +25,7 @@ class BingoBoard(var points : List[List[BingoPoint]]) {
         })
             .reduce((x, y) => x || y) // see if any row is bingo
 
+        // Check columns
         val isColumnBingo = (0 to 4).map(i => {
             points.map(row => row(i)) //column i
                 .map(p => p.isDrawn)
