@@ -10,4 +10,16 @@ object FileUtils {
 
         lines
     }
+
+    def readFileArray(location: String): Array[Array[Int]] = {
+        val source = Source.fromResource(location)
+        val array = try source.getLines().toArray finally source.close()
+
+        val asIntArray = array.indices.map(i => {
+            val row = array(i)
+            row.split("").map(x => x.toInt)
+        })
+
+        asIntArray.toArray
+    }
 }
