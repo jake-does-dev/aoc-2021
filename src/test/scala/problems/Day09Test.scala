@@ -1,8 +1,8 @@
 package org.jakedoes.dev
 package problems
 
-import org.jakedoes.dev.problems.Day09.sumRiskLevels
-import org.jakedoes.dev.problems.Day09.sumBasinSizes
+import problems.Day09.{sumBasinSizes, sumRiskLevels}
+
 import org.scalatest.funsuite.AnyFunSuite
 
 class Day09Test extends AnyFunSuite {
@@ -28,6 +28,6 @@ class Day09Test extends AnyFunSuite {
     test("part two puzzle input") {
         val numLocalMinima = Day09.localMinima("day09/puzzleInput.txt", sumBasinSizes)
 
-        assert(numLocalMinima == 468)
+        assert(numLocalMinima == 468) // not the right answer
     }
 }
