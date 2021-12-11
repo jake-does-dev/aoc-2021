@@ -9,26 +9,26 @@ import org.scalatest.funsuite.AnyFunSuite
 class Day09Test extends AnyFunSuite {
 
     test("part one example input") {
-        val numLocalMinima = Day09.localMinima("day09/example.txt", sumRiskLevels)
+        val riskLevels = Day09.localMinima("day09/example.txt", sumRiskLevels)
 
-        assert(numLocalMinima == 15)
+        assert(riskLevels == 15)
     }
 
     test("part one puzzle input") {
-        val numLocalMinima = Day09.localMinima("day09/puzzleInput.txt", sumRiskLevels)
+        val riskLevels = Day09.localMinima("day09/puzzleInput.txt", sumRiskLevels)
 
-        assert(numLocalMinima == 468)
+        assert(riskLevels == 468)
     }
 
     test("part two example input") {
-        val numLocalMinima = Day09.localMinima("day09/example.txt", sumBasinSizes)
+        val basins = Day09.localMinima("day09/example.txt", sumBasinSizes)
 
-        assert(numLocalMinima == 1134)
+        assert(basins == 1134)
     }
 
     test("part two puzzle input") {
-        val numLocalMinima = Day09.localMinima("day09/puzzleInput.txt", sumBasinSizes)
+        val basins = Day09.localMinima("day09/puzzleInput.txt", sumBasinSizes)
 
-        assert(numLocalMinima == 1280496)
+        assert(basins == 1280496)
     }
 }

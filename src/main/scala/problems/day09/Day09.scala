@@ -1,7 +1,8 @@
 package org.jakedoes.dev
 package problems.day09
 
-import utils.FileUtils
+import utils.ArrayUtils.extract
+import utils.{ArrayUtils, FileUtils}
 
 import scala.collection.mutable.ListBuffer
 
@@ -103,14 +104,6 @@ object Day09 {
 
         if (point.isDefined) {
             neighbours += point.get
-        }
-    }
-
-    def extract(array: Array[Array[Point]], x: Int, y: Int): Option[Point] = {
-        try {
-            Some(array(x)(y))
-        } catch {
-            case e: ArrayIndexOutOfBoundsException => None
         }
     }
 }
