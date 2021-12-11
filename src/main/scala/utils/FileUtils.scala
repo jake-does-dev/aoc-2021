@@ -1,6 +1,8 @@
 package org.jakedoes.dev
 package utils
 
+import problems.domain.{Point, VisitingPoint}
+
 import scala.io.Source
 
 object FileUtils {
@@ -15,11 +17,34 @@ object FileUtils {
         val source = Source.fromResource(location)
         val array = try source.getLines().toArray finally source.close()
 
-        val asIntArray = array.indices.map(i => {
-            val row = array(i)
-            row.split("").map(x => x.toInt)
+        array.map(slice => {
+            slice.split("").map(value => value.toInt)
         })
+    }
 
-        asIntArray.toArray
+    def readFileArrayAsPoints(location: String): Array[Array[Point]] = {
+        val array = readFileArray(location)
+
+        array.indices.map(x => {
+            val row = array(x)
+
+            row.indices.map(y => {
+                Point(array(x)(y), x, y)
+            }).toArray
+
+        }).toArray
+    }
+
+    def readFileArrayAsVisitingPoints(location: String): Array[Array[VisitingPoint]] = {
+        val array = readFileArray(location)
+
+        array.indices.map(x => {
+            val row = array(x)
+
+            row.indices.map(y => {
+                VisitingPoint(array(x)(y), x, y, false)
+            }).toArray
+
+        }).toArray
     }
 }

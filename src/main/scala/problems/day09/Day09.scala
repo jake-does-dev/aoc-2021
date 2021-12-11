@@ -1,6 +1,7 @@
 package org.jakedoes.dev
 package problems.day09
 
+import problems.domain.VisitingPoint
 import utils.ArrayUtils.extract
 import utils.{ArrayUtils, FileUtils}
 
@@ -8,16 +9,10 @@ import scala.collection.mutable.ListBuffer
 
 object Day09 {
 
-    def localMinima(fileLocation: String, localMinimaInspectionFunction: (List[Point], Array[Array[Point]]) => Int): Int = {
-        val array: Array[Array[Point]] = FileUtils.readFileArray(fileLocation)
-            .zipWithIndex.map((slice, x) => {
-            slice.zipWithIndex.map((value, y) => {
-                Point(value, x, y, false)
-            })
-        })
-            .map(slice => slice.toArray)
+    def localMinima(fileLocation: String, localMinimaInspectionFunction: (List[VisitingPoint], Array[Array[VisitingPoint]]) => Int): Int = {
+        val array = FileUtils.readFileArrayAsVisitingPoints(fileLocation)
 
-        val localMinima = ListBuffer[Point]()
+        val localMinima = ListBuffer[VisitingPoint]()
 
         array.zipWithIndex.foreach((slice, rowIdx) => {
             slice.zipWithIndex.foreach((point, colIdx) => {
@@ -36,18 +31,18 @@ object Day09 {
         localMinimaInspectionFunction(localMinima.toList, array)
     }
 
-    def sumRiskLevels(localMinima: List[Point], array: Array[Array[Point]]): Int = {
+    def sumRiskLevels(localMinima: List[VisitingPoint], array: Array[Array[VisitingPoint]]): Int = {
         localMinima
             .map(point => point.value + 1) //risk level is 1 + height
             .sum
     }
 
-    def sumBasinSizes(localMinima: List[Point], array: Array[Array[Point]]): Int = {
+    def sumBasinSizes(localMinima: List[VisitingPoint], array: Array[Array[VisitingPoint]]): Int = {
         val counts = ListBuffer[Int]()
 
         var currentCount = 1
 
-        def resolveBasinNeighbours(array: Array[Array[Point]], point: Point): Unit = {
+        def resolveBasinNeighbours(array: Array[Array[VisitingPoint]], point: VisitingPoint): Unit = {
             val neighbours = List(
                 extract(array, point.x, point.y - 1),
                 extract(array, point.x, point.y + 1),
@@ -88,8 +83,8 @@ object Day09 {
         decreasingCounts(0) * decreasingCounts(1) * decreasingCounts(2)
     }
 
-    def getNeighbours(array: Array[Array[Point]], point: Point): List[Point] = {
-        val neighbours = ListBuffer[Point]()
+    def getNeighbours(array: Array[Array[VisitingPoint]], point: VisitingPoint): List[VisitingPoint] = {
+        val neighbours = ListBuffer[VisitingPoint]()
 
         extractIfExists(neighbours, array, point.x, point.y - 1)
         extractIfExists(neighbours, array, point.x, point.y + 1)
@@ -99,7 +94,7 @@ object Day09 {
         neighbours.toList
     }
 
-    def extractIfExists(neighbours: ListBuffer[Point], array: Array[Array[Point]], neighbourRowIdx: Int, neighbourColIdx: Int): Unit = {
+    def extractIfExists(neighbours: ListBuffer[VisitingPoint], array: Array[Array[VisitingPoint]], neighbourRowIdx: Int, neighbourColIdx: Int): Unit = {
         val point = extract(array, neighbourRowIdx, neighbourColIdx)
 
         if (point.isDefined) {
