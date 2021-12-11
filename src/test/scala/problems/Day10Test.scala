@@ -1,8 +1,6 @@
 package org.jakedoes.dev
 package problems
 
-import problems.Day09.{sumBasinSizes, sumRiskLevels}
-
 import org.scalatest.funsuite.AnyFunSuite
 
 class Day10Test extends AnyFunSuite {
@@ -28,6 +26,6 @@ class Day10Test extends AnyFunSuite {
     test("part two puzzle input") {
         val incompleteSum = Day10.incompleteHandling("day10/puzzleInput.txt")
 
-        assert(incompleteSum == 4263222782L) // not the right answer
+        assert(incompleteSum == 4263222782L)
     }
 }

@@ -1,5 +1,7 @@
 package org.jakedoes.dev
-package problems
+package problems.day04
+
+import problems.day04.BingoPoint
 
 class BingoBoard(var points : List[List[BingoPoint]]) {
     var called = false

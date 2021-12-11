@@ -1,13 +1,14 @@
 package org.jakedoes.dev
-package problems
+package problems.day04
 
+import problems.day04.{BingoBoard, BingoPoint}
 import utils.FileUtils
 
 import scala.collection.mutable.ListBuffer
 
 object Day04 {
 
-    def playBingo(fileLocation: String, continuePlayingCriterion: List[BingoBoard] => Boolean) : (Int, Int) = {
+    def playBingo(fileLocation: String, continuePlayingCriterion: List[BingoBoard] => Boolean): (Int, Int) = {
 
         val lines = FileUtils.readFile(fileLocation)
         val bingoBalls = lines.head.split(",").map(x => x.toInt)

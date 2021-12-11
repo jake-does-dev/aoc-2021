@@ -28,6 +28,6 @@ class Day05Test extends AnyFunSuite {
     test("part two puzzle input") {
         val numOverlaps = Day05.determineNumOverlappingVents("day05/puzzleInput.txt", horizVertAndDiagLines)
 
-        assert(numOverlaps == 8060)
+        assert(numOverlaps == 21577)
     }
 }
