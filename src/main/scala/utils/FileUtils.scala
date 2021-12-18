@@ -22,20 +22,20 @@ object FileUtils {
         })
     }
 
-    def readFileArrayAsPoints(location: String): Array[Array[Point]] = {
+    def readFileArrayAsPoints(location: String): Array[Array[Point[Int]]] = {
         val array = readFileArray(location)
 
         array.indices.map(x => {
             val row = array(x)
 
             row.indices.map(y => {
-                Point(array(x)(y), x, y)
+                Point[Int](array(x)(y), x, y)
             }).toArray
 
         }).toArray
     }
 
-    def readFileArrayAsVisitingPoints(location: String): Array[Array[VisitingPoint]] = {
+    def readFileArrayAsVisitingPoints(location: String): Array[Array[VisitingPoint[Int]]] = {
         val array = readFileArray(location)
 
         array.indices.map(x => {

@@ -1,5 +1,5 @@
 package org.jakedoes.dev
-package day01
+package problems
 
 import problems.Day01
 

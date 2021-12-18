@@ -1,5 +1,5 @@
 package org.jakedoes.dev
-package day02
+package problems
 
 import helpers.MovementType.{Aimed, Naive}
 import problems.Day02

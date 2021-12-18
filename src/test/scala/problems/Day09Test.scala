@@ -1,8 +1,7 @@
 package org.jakedoes.dev
 package problems
 
-import problems.day09.Day09
-import problems.day09.Day09.{sumBasinSizes, sumRiskLevels}
+import Day09.{sumBasinSizes, sumRiskLevels}
 
 import org.scalatest.funsuite.AnyFunSuite
 

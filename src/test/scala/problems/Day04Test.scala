@@ -1,8 +1,7 @@
 package org.jakedoes.dev
 package problems
 
-import problems.day04.Day04
-import problems.day04.Day04.{everyBoardNeedsBingo, oneBoardNeedsBingo}
+import Day04.{everyBoardNeedsBingo, oneBoardNeedsBingo}
 
 import org.scalatest.funsuite.AnyFunSuite
 

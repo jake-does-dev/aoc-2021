@@ -1,7 +1,7 @@
 package org.jakedoes.dev
-package problems.day04
+package problems
 
-import problems.day04.{BingoBoard, BingoPoint}
+import problems.domain.{BingoBoard, BingoPoint}
 import utils.FileUtils
 
 import scala.collection.mutable.ListBuffer
