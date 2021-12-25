@@ -4,13 +4,14 @@ package problems
 import problems.domain.VisitingPoint
 import utils.ArrayUtils.{extract, extractIfExists}
 import utils.FileUtils
+import utils.FileUtils.ofVisitingPoint
 
 import scala.collection.mutable.ListBuffer
 
 object Day09 {
 
     def localMinima(fileLocation: String, localMinimaInspectionFunction: (List[VisitingPoint[Int]], Array[Array[VisitingPoint[Int]]]) => Int): Int = {
-        val array = FileUtils.readFileArrayAsVisitingPoints(fileLocation)
+        val array = FileUtils.readFileArray(fileLocation, ofVisitingPoint)
 
         val localMinima = ListBuffer[VisitingPoint[Int]]()
 

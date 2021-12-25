@@ -1,9 +1,10 @@
 package org.jakedoes.dev
 package utils
 
-import problems.domain.{Point, VisitingPoint}
+import problems.domain.{FlashingPoint, Point, VisitingPoint}
 
 import scala.io.Source
+import scala.reflect.ClassTag
 
 object FileUtils {
     def readFile(location: String): List[String] = {
@@ -22,29 +23,28 @@ object FileUtils {
         })
     }
 
-    def readFileArrayAsPoints(location: String): Array[Array[Point[Int]]] = {
+    def readFileArray[T:ClassTag](location: String, elementFunction: (Int, Int, Int) => T): Array[Array[T]] = {
         val array = readFileArray(location)
 
         array.indices.map(x => {
             val row = array(x)
 
             row.indices.map(y => {
-                Point[Int](array(x)(y), x, y)
+                elementFunction(array(x)(y), x, y)
             }).toArray
 
         }).toArray
     }
 
-    def readFileArrayAsVisitingPoints(location: String): Array[Array[VisitingPoint[Int]]] = {
-        val array = readFileArray(location)
+    def ofPoint(value: Int, x: Int, y: Int) : Point[Int] = {
+        Point(value, x, y)
+    }
 
-        array.indices.map(x => {
-            val row = array(x)
+    def ofVisitingPoint(value: Int, x: Int, y: Int) : VisitingPoint[Int] = {
+        VisitingPoint(value, x, y, false)
+    }
 
-            row.indices.map(y => {
-                VisitingPoint(array(x)(y), x, y, false)
-            }).toArray
-
-        }).toArray
+    def ofFlashingPoint(value: Int, x: Int, y: Int) : FlashingPoint[Int] = {
+        FlashingPoint(value, x, y, false)
     }
 }
